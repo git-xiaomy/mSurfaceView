@@ -109,9 +109,15 @@ public class mSurfaceView extends SurfaceView implements SurfaceHolder.Callback,
         Canvas canvas=null;
         Line line=null;
         while (Flag){
-            canvas=surfaceHolder.lockCanvas();
-            //清空画布
-            canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
+            try {
+                canvas=surfaceHolder.lockCanvas();
+                //清空画布
+                canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
+            }catch (Exception e){
+                break;
+            }
+
+
 
             //遍历雨滴集合
             for (int i = 0; i < lines.size(); i++) {
@@ -123,20 +129,20 @@ public class mSurfaceView extends SurfaceView implements SurfaceHolder.Callback,
                 //取三个随机数 每个随机数代表3种不同的长度以及下落速度
                 int c=random.nextInt(3);
                 if (c==0){
-                    line.setStarty(line.getStarty()+20);
-                    line.setStopy(line.getStarty()+40);
-                }
-                if (c==1){
                     line.setStarty(line.getStarty()+30);
                     line.setStopy(line.getStarty()+50);
                 }
+                if (c==1){
+                    line.setStarty(line.getStarty()+40);
+                    line.setStopy(line.getStarty()+60);
+                }
                 if (c==2){
-                    line.setStarty(line.getStarty()+15);
-                    line.setStopy(line.getStarty()+30);
+                    line.setStarty(line.getStarty()+50);
+                    line.setStopy(line.getStarty()+40);
                 }
                 if (c==3){
-                    line.setStarty(line.getStarty()+40);
-                    line.setStopy(line.getStarty()+35);
+                    line.setStarty(line.getStarty()+60);
+                    line.setStopy(line.getStarty()+45);
                 }
 
             }
@@ -195,4 +201,6 @@ public class mSurfaceView extends SurfaceView implements SurfaceHolder.Callback,
 
 
     }
+
+
 }
